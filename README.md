@@ -1,29 +1,27 @@
 ## Data Engineering Zoomcamp
 
+The Data Engineering Zoomcamp provides core concepts, tools, and practical skills needed for modern data engineering. The course covers a wide range of topics, from containerization and infrastructure as code to advanced batch and streaming processing. With a hands-on, project-based approach, the program ensures participants not only learn the theoretical aspects but also gain practical experience by building real-world pipelines.
+
 ![image](https://github.com/user-attachments/assets/3bc25a83-a158-484b-b73b-3358e930cc4c)
 
 #### Module 1: Containerization and Infrastructure as Code
 
-- Course overview
-- Introduction to GCP
+- GCP
 - Docker and docker-compose
 - Running Postgres locally with Docker
 - Setting up infrastructure on GCP with Terraform
-- Preparing the environment for the course
-- Homework
+- Preparing the environment
 
 #### Module 2: Workflow Orchestration
 - Data Lake
 - Workflow orchestration
 - Workflow orchestration with Kestra
-- Homework
 
 #### Workshop 1: Data Ingestion
 - Reading from apis
 - Building scalable pipelines
 - Normalising data
 - Incremental loading
-- Homework
 
 #### Module 3: Data Warehouse
 - Data Warehouse
