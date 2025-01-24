@@ -1,0 +1,47 @@
+services:
+  pgdatabase:
+    image: postgres:16
+    env_file:
+    - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - "../postgres_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5431:5432"
+    networks:
+      - pg-network
+
+  data-ingestor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+    - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - pgdatabase
+    volumes:
+      - "../data:/data:ro"
+    networks:
+      - pg-network
+    command: [
+      "python", "ingest_data.py",
+      "--user", "${POSTGRES_USER}",
+      "--password", "${POSTGRES_PASSWORD}",
+      "--host", "pgdatabase",
+      "--port", "5432",
+      "--db_name", "${POSTGRES_DB}",
+      "--file_path", "/data/data.csv",
+      "--table_name", "yellow_taxi_trips",
+      "--chunksize", "100000"
+    ]
+
+networks:
+  pg-network:
+    name: pg-network
