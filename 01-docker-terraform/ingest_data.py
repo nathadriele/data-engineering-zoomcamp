@@ -36,21 +36,17 @@ def ingest_data(params: argparse.Namespace) -> None:
     try:
         df_iter = pd.read_csv(csv_path, iterator=True, chunksize=chunksize)
         
-        # Handle first chunk
         df = next(df_iter)
         df['lpep_pickup_datetime'] = pd.to_datetime(df['lpep_pickup_datetime'])
         df['lpep_dropoff_datetime'] = pd.to_datetime(df['lpep_dropoff_datetime'])
         
-        # Create table schema
         pd.io.sql.get_schema(df, table_name, con=engine)
         
-        # Insert first chunk
         df.to_sql(table_name, engine, if_exists='replace', index=False)
         
         total_rows = len(df)
         logging.info(f'First chunk inserted: {len(df)} rows')
 
-        # Process remaining chunks
         while True:
             try:
                 t_start = time()
