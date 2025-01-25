@@ -1,3 +1,4 @@
+
 import os
 import argparse
 
@@ -13,7 +14,7 @@ def main(params):
     db = params.db
     table_name = params.table_name
     url = params.url
-    
+
     if url.endswith('.csv.gz'):
         csv_name = 'output_zone.csv.gz'
     else:
@@ -23,7 +24,9 @@ def main(params):
 
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
-    df = pd.read_csv(csv_name) 
+    df = pd.read_csv(csv_name)
+
+    df.to_sql(name=table_name, con=engine, if_exists='replace')
     
     print("Finished ingesting data into the postgres database")
 
@@ -31,8 +34,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Ingest CSV data to Postgres')
 
     parser.add_argument('--user', required=True, help='user name for postgres')
+    parser.add_argument('--password', required=True, help='password for postgres')
     parser.add_argument('--host', required=True, help='host for postgres')
-    parser.add_argument('--db', required=True, help='database name for postgres')
+    parser.add_argument('--port', required=True, help='port for postgres')
     parser.add_argument('--url', required=True, help='url of the csv file')
 
     args = parser.parse_args()
