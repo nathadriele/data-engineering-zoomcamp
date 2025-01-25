@@ -37,6 +37,7 @@ if __name__ == '__main__':
     parser.add_argument('--password', required=True, help='password for postgres')
     parser.add_argument('--host', required=True, help='host for postgres')
     parser.add_argument('--port', required=True, help='port for postgres')
+    parser.add_argument('--db', required=True, help='database name for postgres')
     parser.add_argument('--url', required=True, help='url of the csv file')
 
     args = parser.parse_args()
