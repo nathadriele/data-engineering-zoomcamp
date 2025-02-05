@@ -23,5 +23,8 @@ CREATE TABLE IF NOT EXISTS green_trip (
         lpep_pickup_datetime,
         lpep_dropoff_datetime,
         pulocationid,
+        dolocationid,
+        fare_amount,
+        tripdistance
     )
 );
