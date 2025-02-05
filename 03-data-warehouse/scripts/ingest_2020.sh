@@ -12,3 +12,5 @@ done
 for color in "green" "yellow"; do
   args+="--color $color "
 done
+
+python "scripts/ingest_url_data.py" $args
