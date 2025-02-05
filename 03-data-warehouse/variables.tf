@@ -19,3 +19,8 @@ variable "location" {
   description = "Project Location"
   default     = "US"
 }
+
+variable "bq_dataset_name" {
+  description = "My BigQuery Dataset Name"
+  default     = "zoomcamp_week_3_dataset"
+}
