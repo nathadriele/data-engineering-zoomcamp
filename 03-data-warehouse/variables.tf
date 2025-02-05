@@ -24,3 +24,8 @@ variable "bq_dataset_name" {
   description = "My BigQuery Dataset Name"
   default     = "zoomcamp_week_3_dataset"
 }
+
+variable "gcs_bucket_name" {
+  description = "My Storage Bucket Name"
+  default     = "zoomcamp-week-3-bucket"
+}
