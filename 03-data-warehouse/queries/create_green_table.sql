@@ -22,5 +22,6 @@ CREATE TABLE IF NOT EXISTS green_trip (
     CONSTRAINT trip_unique UNIQUE (
         lpep_pickup_datetime,
         lpep_dropoff_datetime,
+        pulocationid,
     )
 );
