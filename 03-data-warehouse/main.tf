@@ -23,7 +23,7 @@ resource "google_storage_bucket" "zoomcamp_week_3_bucket" {
       age = 1
     }
     action {
-      type = ""
+      type = "AbortIncompleteMultipartUpload"
     }
   }
 }
