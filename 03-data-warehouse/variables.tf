@@ -29,3 +29,8 @@ variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
   default     = "zoomcamp-week-3-bucket"
 }
+
+variable "gcs_storage_class" {
+  description = "Bucket Storage Class"
+  default     = "STANDARD"
+}
