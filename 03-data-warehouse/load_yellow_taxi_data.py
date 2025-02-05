@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Change this to your bucket name
 BUCKET_NAME = os.environ["BUCKET_NAME"]
 
 # If you authenticated through the GCP SDK you can comment out these two lines
