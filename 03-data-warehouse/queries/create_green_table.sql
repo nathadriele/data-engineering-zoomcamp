@@ -25,6 +25,6 @@ CREATE TABLE IF NOT EXISTS green_trip (
         pulocationid,
         dolocationid,
         fare_amount,
-        tripdistance
+        trip_distance
     )
 );
