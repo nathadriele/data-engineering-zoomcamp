@@ -4,6 +4,19 @@ The Data Engineering Zoomcamp provides core concepts, tools, and practical skill
 
 ![image](https://github.com/user-attachments/assets/3bc25a83-a158-484b-b73b-3358e930cc4c)
 
+#### Featured Tools and Technologies
+
+- Docker: Containerization platform for building, shipping, and running applications.
+- Terraform: Infrastructure as code tool for building, changing, and versioning infrastructure.
+- Google BigQuery: Serverless, highly scalable, and cost-effective multi-cloud data warehouse.
+- dbt (data build tool): Analytics engineering tool providing a transformation-focused query runner.
+- Apache Spark: Open-source distributed computing system for big data processing.
+- Apache Kafka: Distributed event streaming platform for building real-time data pipelines and streaming applications.
+- Kestra: Flexible and scalable workflow orchestration and automation tool.
+- PostgreSQL: Powerful open-source relational database system.
+- Google Data Studio: Data visualization and reporting tool to turn data into informative dashboards and reports.
+- Metabase: Open-source business intelligence and analytics tool for easy data visualization and exploration.
+
 #### Module 1: Containerization and Infrastructure as Code
 
 - GCP
