@@ -28,7 +28,7 @@ resource "google_storage_bucket" "zoomcamp_week_3_bucket" {
   }
 }
 
-resource "" "" {
+resource "google_bigquery_dataset" "" {
   dataset_id = var.bq_dataset_name
   location   = var.location
 }
