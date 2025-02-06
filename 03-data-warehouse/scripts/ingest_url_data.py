@@ -15,56 +15,56 @@ CREATE TABLE IF NOT EXISTS {INSERTED_DATA} (
     year int NOT NULL,
     month int NOT NULL,
     CONSTRAINT unique_entry UNIQUE(color, year, month)
-)
+);
 """
+
 CREATE_TAXI_TABLE = {
     "green": f"""
 CREATE TABLE IF NOT EXISTS {TABLES['green']} (
-  VendorID smallint,
-  lpep_pickup_datetime timestamp not null,
-  lpep_dropoff_datetime timestamp not null,
-  store_and_fwd_flag boolean,
-  RatecodeID smallint,
-  PULocationID int,
-  DOLocationID int,
-  passenger_count smallint,
-  trip_distance numeric,
-  fare_amount numeric,
-  extra numeric,
-  mta_tax numeric,
-  tip_amount numeric,
-  tolls_amount numeric,
-  ehail_fee numeric,
-  improvement_surcharge numeric,
-  total_amount numeric,
-  payment_type smallint,
-  trip_type smallint,
-  congestion_surcharge numeric
+    VendorID smallint,
+    lpep_pickup_datetime timestamp NOT NULL,
+    lpep_dropoff_datetime timestamp NOT NULL,
+    store_and_fwd_flag boolean,
+    RatecodeID smallint,
+    PULocationID int,
+    DOLocationID int,
+    passenger_count smallint,
+    trip_distance numeric,
+    fare_amount numeric,
+    extra numeric,
+    mta_tax numeric,
+    tip_amount numeric,
+    tolls_amount numeric,
+    ehail_fee numeric,
+    improvement_surcharge numeric,
+    total_amount numeric,
+    payment_type smallint,
+    trip_type smallint,
+    congestion_surcharge numeric
 );
-    """,
+""",
     "yellow": f"""
 CREATE TABLE IF NOT EXISTS {TABLES['yellow']} (
-  VendorID smallint,
-  tpep_pickup_datetime timestamp not null,
-  tpep_dropoff_datetime timestamp not null,
-  passenger_count smallint,
-  trip_distance numeric,
-  RatecodeID smallint,
-  store_and_fwd_flag boolean,
-  PULocationID int,
-  DOLocationID int,
-  payment_type smallint,
-  fare_amount numeric,
-  extra numeric,
-  mta_tax numeric,
-  tip_amount numeric,
-  tolls_amount numeric,
-  improvement_surcharge numeric,
-  total_amount numeric,
-  congestion_surcharge numeric
-  )
-  ;
-  """,
+    VendorID smallint,
+    tpep_pickup_datetime timestamp NOT NULL,
+    tpep_dropoff_datetime timestamp NOT NULL,
+    passenger_count smallint,
+    trip_distance numeric,
+    RatecodeID smallint,
+    store_and_fwd_flag boolean,
+    PULocationID int,
+    DOLocationID int,
+    payment_type smallint,
+    fare_amount numeric,
+    extra numeric,
+    mta_tax numeric,
+    tip_amount numeric,
+    tolls_amount numeric,
+    improvement_surcharge numeric,
+    total_amount numeric,
+    congestion_surcharge numeric
+);
+""",
 }
 
 
@@ -100,7 +100,7 @@ def already_inserted(conn, color: str, year: int, month: int) -> bool:
     cursor = conn.cursor()
     cursor.execute(CREATE_INSERTED_TABLE)
     cursor.execute(
-        f"select 1 from {INSERTED_DATA} where color='{color}' AND year={year} AND month={month}"
+        f"SELECT 1 FROM {INSERTED_DATA} WHERE color='{color}' AND year={year} AND month={month}"
     )
     return cursor.fetchone() is not None
 
@@ -108,9 +108,9 @@ def already_inserted(conn, color: str, year: int, month: int) -> bool:
 def mark_as_inserted(conn, color: str, year: int, month: int) -> None:
     cursor = conn.cursor()
     cursor.execute(
-        f"insert into {INSERTED_DATA}(color, year, month) VALUES('{color}', {year}, {month})"
+        f"INSERT INTO {INSERTED_DATA}(color, year, month) VALUES('{color}', {year}, {month})"
     )
-    print(f"inserted {color}, {year}, {month}")
+    print(f"Inserted {color}, {year}, {month}")
 
 
 def create_connection():
@@ -125,13 +125,43 @@ def create_connection():
 
 def read_url_data(color: str, year: int, month: int):
     temp_file = tempfile.TemporaryFile()
-    assert 1 <= month <= 12
-    assert color in TABLES.keys()
-    url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{color}_tripdata_{year:04d}-{month:02d}.csv.gz"
+    assert 1 <= month <= 12, "Mês deve ser entre 1 e 12"
+    assert color in TABLES.keys(), "Cor inválida"
+    url = (
+        f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/"
+        f"{color}_tripdata_{year:04d}-{month:02d}.csv.gz"
+    )
     response = requests.get(url, stream=True)
     response.raise_for_status()
     for chunk in response.iter_content(chunk_size=1024):
         temp_file.write(chunk)
-    print("downloaded data from %s into %s" % (url, temp_file.name))
-    temp_file.seek(0) 
+    print("Downloaded data from %s into temporary file" % url)
+    temp_file.seek(0)
     return temp_file
+
+
+def import_data(data, conn, table: str) -> None:
+    print("Importing data")
+    query_import_csv = f"COPY {table} FROM STDIN WITH (FORMAT csv, HEADER true);"
+    cursor = conn.cursor()
+
+    with gzip.GzipFile(fileobj=data) as csv:
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Import Taxi data into Postgres database"
+    )
+    parser.add_argument("--year", type=int, action="append", required=True, help="Year")
+    parser.add_argument(
+        "--month", type=int, action="append", required=True, help="Month"
+    )
+    parser.add_argument(
+        "--color",
+        required=True,
+        choices=("green", "yellow"),
+        help="Taxi color",
+    )
+    args = parser.parse_args()
+    for year, month, color in itertools.product(args.year, args.month, args.color):
+        get_taxi_data(year=year, month=month, color=color)
