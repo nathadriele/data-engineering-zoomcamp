@@ -159,6 +159,8 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--color",
+        action="append",
+        type=str,
         required=True,
         choices=("green", "yellow"),
         help="Taxi color",
