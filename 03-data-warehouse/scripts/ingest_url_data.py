@@ -146,6 +146,7 @@ def import_data(data, conn, table: str) -> None:
     cursor = conn.cursor()
 
     with gzip.GzipFile(fileobj=data) as csv:
+        cursor.copy_expert(query_import_csv, csv)
 
 
 if __name__ == "__main__":
