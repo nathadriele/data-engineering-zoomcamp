@@ -74,6 +74,7 @@ if __name__ == "__main__":
     parser.add_argument("--host", help="Hostname for Postgres.")
     parser.add_argument("--port", help="Port for Postgres connection.")
     parser.add_argument("--db", help="Databse name for Postgres")
+    parser.add_argument("--tb", help="Destination table name for Postgres.")
 
     args = parser.parse_args()
     main(args)
