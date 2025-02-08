@@ -21,6 +21,7 @@ def main(params):
         file_name = url.rsplit("/", 1)[-1].strip()
         print(f"Downloading {file_name} ...")
         os.system(f"curl {url.strip()} -o {file_name}")
+        print("\n")
     else:
         file_name = file
 
@@ -32,6 +33,7 @@ def main(params):
     elif ".parquet" in file_name:
         file = pq.ParquetFile(file_name)
         df = next(file.iter_batches(batch_size=10)).to_pandas()
+        df_iter = file.iter_batches(batch_size=100000)
     else:
         print("Error. Only .csv or .parquet files allowed.")
         sys.exit()
@@ -52,6 +54,7 @@ def main(params):
 
         b_start = time()
         batch_df.to_sql(name=tb, con=engine, if_exists="append")
+        b_end = time()
 
         print(f"inserted! time taken {b_end-b_start:10.3f} seconds.\n")
 
@@ -68,8 +71,9 @@ if __name__ == "__main__":
 
     parser.add_argument("--user", help="Username for Postgres.")
     parser.add_argument("--password", help="Password to the username for Postgres.")
+    parser.add_argument("--host", help="Hostname for Postgres.")
     parser.add_argument("--port", help="Port for Postgres connection.")
-    parser.add_argument("--tb", help="Destination table name for Postgres.")
+    parser.add_argument("--db", help="Databse name for Postgres")
 
     args = parser.parse_args()
     main(args)
