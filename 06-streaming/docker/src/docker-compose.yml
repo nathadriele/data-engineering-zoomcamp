@@ -36,7 +36,9 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.flink
-    image: pyflink:1.16.0
+    # image: pyflink:1.16.0
+    # image: pyflink:1.20.1
+    image: pyflink:1.19.2
     container_name: "flink-jobmanager"
     pull_policy: never
     platform: "linux/amd64"
@@ -64,7 +66,9 @@ services:
   
   # Flink task manager
   taskmanager:
-    image: pyflink:1.16.0
+    # image: pyflink:1.16.0
+    # image: pyflink:1.20.1
+    image: pyflink:1.19.2
     container_name: "flink-taskmanager"
     pull_policy: never
     platform: "linux/amd64"
@@ -95,21 +99,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     extra_hosts:
      - "host.docker.internal:127.0.0.1" #// Linux
      - "host.docker.internal:host-gateway" #// Access services on the host machine from within the Docker container
-  
-  pgadmin:
-    container_name: "pgadmin"
-    image: dpage/pgadmin4:latest
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "pgadmin@pgadmin.com"
-      PGADMIN_DEFAULT_PASSWORD: "pgadmin"
-    ports:
-      - "8080:80"
-    extra_hosts:
-     - "host.docker.internal:127.0.0.1" #// Linux
-     - "host.docker.internal:host-gateway"
-    # volumes:
-    #   - vol-pgadmin_data:/var/lib/pgadmin
