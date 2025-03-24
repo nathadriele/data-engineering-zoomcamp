@@ -1,6 +1,6 @@
 ## Data Engineering Zoomcamp
 
-The Data Engineering Zoomcamp provides core concepts, tools, and practical skills needed for modern data engineering. The course covers a wide range of topics, from containerization and infrastructure as code to advanced batch and streaming processing. With a hands-on, project-based approach, the program ensures participants not only learn the theoretical aspects but also gain practical experience by building real-world pipelines.
+The Data Engineering Zoomcamp offers essential concepts, tools, and hands-on skills required for modern data engineering. Covering a broad spectrum of topics — including containerization, infrastructure as code, and advanced batch and streaming processing — the course takes a practical, project-based approach. This ensures that participants not only understand the theory but also apply their knowledge by developing real-world data pipelines.
 
 ![image](https://github.com/user-attachments/assets/3bc25a83-a158-484b-b73b-3358e930cc4c)
 
