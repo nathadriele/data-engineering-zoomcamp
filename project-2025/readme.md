@@ -1,4 +1,4 @@
-# Data Engineering Project - Mental Health Dashboard
+# Data Engineering Project - Mental Health
 
 This project demonstrates an end-to-end data pipeline built using modern tools and best practices in data engineering. The pipeline extracts, transforms, loads, and visualizes data from a global mental health survey, applying concepts learned in the Data Engineering Zoomcamp.
 
@@ -157,3 +157,34 @@ mental_health_project/
 
 ---
 
+## Setup and Execution Guide
+
+### 1. Environment Setup
+
+**Prerequisites:**
+- Windows 10/11
+- Python 3.8+
+- Docker Desktop (to run Azurite)
+- Azure account (optional for cloud environments)
+
+**Tool Installation:**
+
+Use the script below to install Chocolatey and the required tools:
+
+```powershell
+# setup_environment.ps1
+
+# Install Chocolatey (if not already installed)
+Set-ExecutionPolicy Bypass -Scope Process -Force; `
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Install required tools
+choco install -y python terraform docker-desktop git
+
+# Create and activate Python virtual environment0
+python -m venv .venv
+.\.venv\Scripts\activate
+
+# Install Python packages
+pip install mage-ai duckdb dbt-core streamlit pandas pyarrow azure-storage-blob plotly
