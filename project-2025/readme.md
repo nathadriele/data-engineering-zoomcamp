@@ -134,6 +134,7 @@ The pipeline consists of five main stages:
 
 The recommended project directory structure is as follows:
 
+```powershell
 mental_health_project/
 │
 ├── infrastructure/
@@ -156,6 +157,7 @@ mental_health_project/
 │
 └── visualization/
     └── dashboard.py             # Interactive dashboard code
+```
 
 ---
 
@@ -190,3 +192,83 @@ python -m venv .venv
 
 # Install Python packages
 pip install mage-ai duckdb dbt-core streamlit pandas pyarrow azure-storage-blob plotly
+```
+
+## 2. Infrastructure Provisioning (Terraform)
+
+1. Navigate to the infrastructure folder:
+
+```powershell
+cd infrastructure
+```
+
+2. Run the following commands:
+
+```powershell
+terraform init
+terraform apply -auto-approve
+.\azurite_setup.ps1
+```
+
+The azurite_setup.ps1 script will start Azurite via Docker, setting up the local data lake.
+
+### 3. Data Ingestion Pipeline (Mage)
+
+1. In the data_pipeline folder, start the Mage project:
+
+```powershell
+cd data_pipeline
+mage start mental-health
+```
+
+2. Inside the mental-health folder, create the ingestion_pipeline.py file (refer to internal documentation for code details).
+
+3. Open your browser and access http://localhost:6789 to monitor the pipeline execution.
+
+### 4. Data Transformation (DBT)
+
+1. Navigate to the DBT project directory:
+
+```powershell
+cd dbt_project/mental_health_transform
+```
+
+2. Initialize and configure the DBT project:
+
+```powershell
+dbt init mental_health_transform
+```
+
+3. Create and edit the following files:
+
+- models/schema.yml: Defines the schema and tests.
+
+- models/mental_health_clean.sql: Contains the SQL model for data transformation.
+
+- profiles.yml: Configure the connection to DuckDB using the relative path ../data_pipeline/mental_health.duckdb.
+
+4. Run the transformations and tests:
+
+```powershell
+dbt run
+dbt test
+```
+
+## 5. Interactive Dashboard (Streamlit)
+
+1. Navigate to the visualization folder:
+
+```powershell
+cd visualization
+```
+
+2. Launch the dashboard:
+
+```powershell
+streamlit run dashboard.py
+```
+
+The dashboard will display at least two charts:
+
+- A chart showing the distribution of categorical data (e.g., by country, gender).
+- A chart depicting the evolution of records over time or another relevant dimension.
