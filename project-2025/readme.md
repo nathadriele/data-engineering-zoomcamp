@@ -2,6 +2,8 @@
 
 ![image](https://github.com/user-attachments/assets/5f07e75c-6065-41dc-beb2-17236d74ed97)
 
+This project demonstrates an end-to-end data pipeline built using modern tools and best practices in data engineering. The pipeline extracts, transforms, loads, and visualizes data from a global mental health survey, applying concepts learned in the Data Engineering Zoomcamp.
+ 
 ---
 
 ## Table of Contents
@@ -277,9 +279,10 @@ The dashboard will display at least two charts:
 This project demonstrates a complete Data Engineering solution, covering data ingestion into a data lake, transformation in a data warehouse, and interactive visualization via a dashboard. Its modular design and use of modern tools (Terraform, Mage, DBT, and Streamlit) ensure scalability and adaptability across different environments (local or cloud). Detailed documentation and step-by-step instructions make the project reproducible and easy to maintain.
 
 ## References
+
 [Data Engineering Zoomcamp - Course Projects](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/projects#datasets)
-Kaggle - Mental Health Dataset
-Terraform Documentation
-Mage Documentation
-DBT Documentation
-Streamlit Documentation
+[Kaggle - Mental Health Dataset](https://www.kaggle.com/datasets/divaniazzahra/mental-health-dataset)
+[Terraform Documentation](https://www.terraform.io/docs)
+[Mage Documentation](https://docs.mage.ai)
+[DBT Documentation](https://docs.getdbt.com)
+[Streamlit Documentation](https://docs.streamlit.io)
