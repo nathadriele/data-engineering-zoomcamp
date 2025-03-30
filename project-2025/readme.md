@@ -152,31 +152,61 @@ In this project, a suite of modern and specialized tools was integrated to build
 
 ## Project Structure Basic
 
-The recommended project directory structure is as follows:
-
-```powershell
 mental_health_project/
 │
 ├── infrastructure/
-│   ├── main.tf  
-│   ├── azurite_setup.ps1     
-│   └── azurite-data/      
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── azurite_setup.ps1
+│   └── azurite-data/
 │
 ├── data_pipeline/
 │   ├── mental-health-project/
-│   │   └── ingestion_pipeline.py
+│   │   ├── ingestion_pipeline.py
+│   │   ├── io_config.yaml
+│   │   └── blocks/
+│   ├── scripts/
+│   │   ├── ingest_data.py
+│   │   └── load_to_warehouse.py
 │   └── mental_health.duckdb
 │
 ├── dbt_project/
 │   └── mental_health_transform/
 │       ├── models/
-│       │   ├── schema.yml
-│       │   └── mental_health_clean.sql
-│       ├── dbt_project.yml   
-│       └── profiles.yml 
+│       │   ├── staging/
+│       │   │   └── stg_mental_health.sql
+│       │   ├── marts/
+│       │   │   └── mental_health_clean.sql
+│       │   └── schema.yml
+│       ├── snapshots/
+│       ├── seeds/
+│       ├── dbt_project.yml
+│       └── profiles.yml
 │
-└── visualization/
-    └── dashboard.py
+├── visualization/
+│   ├── dashboard.py
+│   ├── charts/
+│   │   ├── distribution_plot.py
+│   │   └── temporal_plot.py
+│   ├── pages/
+│   │   └── about.py
+│   └── utils/
+│       └── data_loader.py
+│
+├── tests/
+│   ├── test_ingestion.py
+│   ├── test_transformation.sql
+│   └── test_visualization.py
+│
+├── notebooks/
+│   └── exploratory_analysis.ipynb
+│
+├── requirements.txt
+├── pyproject.toml
+├── Makefile
+├── run_project.ps1
+└── README.md
 ```
 
 ---
