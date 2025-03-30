@@ -13,8 +13,8 @@ This project demonstrates an end-to-end data pipeline built using modern tools a
 - [Project Objectives](#project-objectives)
 - [About the Dataset](#about-the-dataset)
 - [Pipeline Architecture](#pipeline-architecture)
-- [Technologies Used](#technologies-used)
-- [Project Structure](#project-structure)
+- [Technologies and Tools Used](#technologies-and-tools-used)
+- [Project Structure Basic](#project-structure-basic)
 - [Setup and Execution Guide](#setup-and-execution-guide)
   - [1. Environment Setup](#1-environment-setup)
   - [2. Infrastructure Provisioning (Terraform)](#2-infrastructure-provisioning-terraform)
@@ -107,31 +107,50 @@ The pipeline consists of five main stages:
 
 ---
 
-## Technologies Used
+## Technologies and Tools Used
 
-- **Infrastructure as Code (IaC):**  
-  - **Terraform:** For provisioning the local environment and configuring Azurite.
+![image](https://github.com/user-attachments/assets/7f75cae4-c9a3-4cdf-9e95-564d43ab0fe9)
 
-- **Workflow Orchestration & Data Ingestion:**  
-  - **Mage:** To create and orchestrate the data ingestion pipeline.
+In this project, a suite of modern and specialized tools was integrated to build a robust end-to-end data pipeline. Each tool plays a critical role in the process of extracting, transforming, loading, and visualizing data. Below is a detailed description of each tool and its purpose within the project:
 
-- **Data Lake and Data Warehouse:**  
-  - **Azurite:** Local emulator for Azure Storage acting as the data lake.
-  - **DuckDB:** Local data warehouse for data storage and querying.
+- **Terraform**
 
-- **Data Transformation:**  
-  - **DBT (Data Build Tool):** For transforming, modeling, and testing the data.
+  **Description:** A powerful Infrastructure as Code (IaC) tool that enables the declarative creation, modification, and versioning of infrastructure.  
+  **Role in the Project:** Used to provision and configure the local environment, including the Azure Storage emulator (Azurite) and other infrastructure dependencies. This ensures that the environment is reproducible, scalable, and version-controlled.
 
-- **Visualization:**  
-  - **Streamlit:** For developing the interactive dashboard.
-  - **Plotly:** For creating dynamic and interactive charts.
+- **Mage**
 
-- **Languages and Tools:**  
-  - Python, SQL, HCL, YAML
+  **Description:** A modern platform for designing and orchestrating data pipelines, making it easier to construct and execute data ingestion flows.  
+  **Role in the Project:** Manages the data ingestion pipeline by extracting data from the source dataset and uploading it to the data lake (Azurite). It ensures smooth and automated data flow from extraction to storage.
+
+- **Azurite**
+
+  **Description:** A local emulator for Azure Storage that simulates the behavior of Azure’s storage services without requiring a cloud environment.  
+  **Role in the Project:** Serves as the local data lake where raw data is initially stored after ingestion. This setup allows for testing and development in a cost-effective and controlled environment.
+
+- **DuckDB**
+
+  **Description:** A high-performance, columnar-oriented relational database optimized for analytical queries. It is designed for efficient local data processing and analysis.  
+  **Role in the Project:** Acts as the data warehouse by storing and enabling efficient querying of the ingested data from Azurite. This facilitates further transformation and analysis steps.
+
+- **DBT (Data Build Tool)**
+
+  **Description:** A transformation tool that enables data modeling, testing, and documentation using SQL. It enforces best practices in data transformation and quality assurance.  
+  **Role in the Project:** Responsible for transforming and modeling the data stored in DuckDB. DBT applies rigorous testing and validation, ensuring that the data is clean and ready for analysis before it is visualized.
+
+- **Streamlit**
+
+  **Description:** An open-source Python framework that simplifies the creation of interactive web applications, particularly dashboards and data visualizations.  
+  **Role in the Project:** Used to build an interactive dashboard that dynamically displays insights from the mental health data. Streamlit offers a user-friendly interface for exploring and interacting with the visualized data.
+
+- **Plotly**
+  
+  **Description:** A versatile data visualization library in Python that provides interactive, high-quality charts and graphs.  
+  **Role in the Project:** Integrated with Streamlit to generate dynamic and interactive visualizations. Plotly enhances the dashboard by enabling detailed exploration of data trends and distributions.
 
 ---
 
-## Project Structure
+## Project Structure Basic
 
 The recommended project directory structure is as follows:
 
@@ -139,25 +158,25 @@ The recommended project directory structure is as follows:
 mental_health_project/
 │
 ├── infrastructure/
-│   ├── main.tf                 # Main Terraform configuration file
-│   ├── azurite_setup.ps1       # Script to start Azurite via Docker
-│   └── azurite-data/           # Persistent data directory for Azurite (created automatically)
+│   ├── main.tf  
+│   ├── azurite_setup.ps1     
+│   └── azurite-data/      
 │
 ├── data_pipeline/
-│   ├── my_data_project/        # Mage project (created automatically)
-│   │   └── ingestion_pipeline.py  # Data ingestion and loading pipeline
-│   └── mental_health.duckdb    # DuckDB data warehouse (generated at runtime)
+│   ├── mental-health-project/
+│   │   └── ingestion_pipeline.py
+│   └── mental_health.duckdb
 │
 ├── dbt_project/
-│   └── mental_health_transform/  # DBT project
+│   └── mental_health_transform/
 │       ├── models/
-│       │   ├── schema.yml        # Schema definition and tests
-│       │   └── mental_health_clean.sql  # Data transformation model
-│       ├── dbt_project.yml       # DBT project configuration
-│       └── profiles.yml          # DBT connection configuration to DuckDB
+│       │   ├── schema.yml
+│       │   └── mental_health_clean.sql
+│       ├── dbt_project.yml   
+│       └── profiles.yml 
 │
 └── visualization/
-    └── dashboard.py             # Interactive dashboard code
+    └── dashboard.py
 ```
 
 ---
@@ -195,7 +214,7 @@ python -m venv .venv
 pip install mage-ai duckdb dbt-core streamlit pandas pyarrow azure-storage-blob plotly
 ```
 
-## 2. Infrastructure Provisioning (Terraform)
+## 2. Infrastructure Provisioning (Terraform) 
 
 1. Navigate to the infrastructure folder:
 
@@ -280,9 +299,9 @@ This project demonstrates a complete Data Engineering solution, covering data in
 
 ## References
 
-[Data Engineering Zoomcamp - Course Projects](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/projects#datasets)
-[Kaggle - Mental Health Dataset](https://www.kaggle.com/datasets/divaniazzahra/mental-health-dataset)
-[Terraform Documentation](https://www.terraform.io/docs)
-[Mage Documentation](https://docs.mage.ai)
-[DBT Documentation](https://docs.getdbt.com)
-[Streamlit Documentation](https://docs.streamlit.io)
+- [Data Engineering Zoomcamp - Course Projects](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/projects#datasets)
+- [Kaggle - Mental Health Dataset](https://www.kaggle.com/datasets/divaniazzahra/mental-health-dataset)
+- [Terraform Documentation](https://www.terraform.io/docs)
+- [Mage Documentation](https://docs.mage.ai)
+- [DBT Documentation](https://docs.getdbt.com)
+- [Streamlit Documentation](https://docs.streamlit.io)
