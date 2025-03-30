@@ -69,6 +69,17 @@ To get started with this project locally, follow the steps below:
 git clone https://github.com/nathadriele/data-engineering-zoomcamp.git
 ```
 
+2. Navigate to the project folder
+
+```bash
+cd data-engineering-zoomcamp/project-2025
+```
+
+3. Explore the structure
+
+You can now explore the complete mental_health_project pipeline, including the infrastructure setup, data pipeline, DBT transformations, and interactive dashboard.
+
+
 ---
 
 ## About the Dataset
