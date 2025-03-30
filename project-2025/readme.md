@@ -2,8 +2,6 @@
 
 ![image](https://github.com/user-attachments/assets/5f07e75c-6065-41dc-beb2-17236d74ed97)
 
-This project demonstrates an end-to-end data pipeline built using modern tools and best practices in data engineering. The pipeline extracts, transforms, loads, and visualizes data from a global mental health survey, applying concepts learned in the Data Engineering Zoomcamp.
-
 ---
 
 ## Table of Contents
@@ -21,7 +19,6 @@ This project demonstrates an end-to-end data pipeline built using modern tools a
   - [3. Data Ingestion Pipeline (Mage)](#3-data-ingestion-pipeline-mage)
   - [4. Data Transformation (DBT)](#4-data-transformation-dbt)
   - [5. Interactive Dashboard (Streamlit)](#5-interactive-dashboard-streamlit)
-- [Potential Improvements and Extensions](#potential-improvements-and-extensions)
 - [Final Considerations](#final-considerations)
 - [References](#references)
 
@@ -57,6 +54,8 @@ Mental health is a critical global issue. This project utilizes a dataset that r
 ---
 
 ## About the Dataset
+
+![image](https://github.com/user-attachments/assets/ca85464a-9278-4a59-a141-47626642668e)
 
 The dataset used in this project is obtained from [Kaggle](https://www.kaggle.com/datasets/divaniazzahra/mental-health-dataset) and contains the results of a global mental health survey.
 
@@ -272,3 +271,15 @@ The dashboard will display at least two charts:
 
 - A chart showing the distribution of categorical data (e.g., by country, gender).
 - A chart depicting the evolution of records over time or another relevant dimension.
+
+## Final Considerations
+
+This project demonstrates a complete Data Engineering solution, covering data ingestion into a data lake, transformation in a data warehouse, and interactive visualization via a dashboard. Its modular design and use of modern tools (Terraform, Mage, DBT, and Streamlit) ensure scalability and adaptability across different environments (local or cloud). Detailed documentation and step-by-step instructions make the project reproducible and easy to maintain.
+
+## References
+[Data Engineering Zoomcamp - Course Projects](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/projects#datasets)
+Kaggle - Mental Health Dataset
+Terraform Documentation
+Mage Documentation
+DBT Documentation
+Streamlit Documentation
