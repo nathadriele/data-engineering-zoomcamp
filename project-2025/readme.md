@@ -69,16 +69,21 @@ To get started with this project locally, follow the steps below:
 git clone https://github.com/nathadriele/data-engineering-zoomcamp.git
 ```
 
-2. Navigate to the project folder
+### 2. Navigate to the project folder
 
 ```bash
 cd data-engineering-zoomcamp/project-2025
 ```
 
-3. Explore the structure
+### 3. Explore the structure
 
-You can now explore the complete mental_health_project pipeline, including the infrastructure setup, data pipeline, DBT transformations, and interactive dashboard.
+Inside the project-2025 directory, you’ll find all the components needed for the end-to-end pipeline, including:
 
+- infrastructure/ — Infrastructure as Code using Terraform and Docker.
+- data_pipeline/ — Data ingestion logic and Mage project.
+- dbt_project/ — DBT models for data transformation.
+- visualization/ — Streamlit dashboard and Plotly visualizations.
+- README.md — Documentation with setup and execution guide.
 
 ---
 
@@ -282,15 +287,15 @@ python -m venv .venv
 pip install mage-ai duckdb dbt-core streamlit pandas pyarrow azure-storage-blob plotly
 ```
 
-## 2. Infrastructure Provisioning (Terraform) 
+### 2. Infrastructure Provisioning (Terraform) 
 
-1. Navigate to the infrastructure folder:
+#### 1. Navigate to the infrastructure folder:
 
 ```powershell
 cd infrastructure
 ```
 
-2. Run the following commands:
+#### 2. Run the following commands:
 
 ```powershell
 terraform init
@@ -302,32 +307,32 @@ The azurite_setup.ps1 script will start Azurite via Docker, setting up the local
 
 ### 3. Data Ingestion Pipeline (Mage)
 
-1. In the data_pipeline folder, start the Mage project:
+#### 1. In the data_pipeline folder, start the Mage project:
 
 ```powershell
 cd data_pipeline
 mage start mental-health
 ```
 
-2. Inside the mental-health folder, create the ingestion_pipeline.py file (refer to internal documentation for code details).
+#### 2. Inside the mental-health folder, create the ingestion_pipeline.py file (refer to internal documentation for code details).
 
-3. Open your browser and access http://localhost:6789 to monitor the pipeline execution.
+#### 3. Open your browser and access http://localhost:6789 to monitor the pipeline execution.
 
 ### 4. Data Transformation (DBT)
 
-1. Navigate to the DBT project directory:
+#### 1. Navigate to the DBT project directory:
 
 ```powershell
 cd dbt_project/mental_health_transform
 ```
 
-2. Initialize and configure the DBT project:
+#### 2. Initialize and configure the DBT project:
 
 ```powershell
 dbt init mental_health_transform
 ```
 
-3. Create and edit the following files:
+#### 3. Create and edit the following files:
 
 - models/schema.yml: Defines the schema and tests.
 
@@ -335,7 +340,7 @@ dbt init mental_health_transform
 
 - profiles.yml: Configure the connection to DuckDB using the relative path ../data_pipeline/mental_health.duckdb.
 
-4. Run the transformations and tests:
+#### 4. Run the transformations and tests:
 
 ```powershell
 dbt run
@@ -344,19 +349,19 @@ dbt test
 
 ## 5. Interactive Dashboard (Streamlit)
 
-1. Navigate to the visualization folder:
+#### 1. Navigate to the visualization folder:
 
 ```powershell
 cd visualization
 ```
 
-2. Launch the dashboard:
+#### 2. Launch the dashboard:
 
 ```powershell
 streamlit run dashboard.py
 ```
 
-The dashboard will display at least two charts:
+#### The dashboard will display at least two charts:
 
 - A chart showing the distribution of categorical data (e.g., by country, gender).
 - A chart depicting the evolution of records over time or another relevant dimension.
