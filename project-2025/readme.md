@@ -152,6 +152,7 @@ In this project, a suite of modern and specialized tools was integrated to build
 
 ## Project Structure Basic
 
+```powershell
 mental_health_project/
 │
 ├── infrastructure/
