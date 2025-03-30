@@ -304,4 +304,5 @@ This project demonstrates a complete Data Engineering solution, covering data in
 - [Terraform Documentation](https://www.terraform.io/docs)
 - [Mage Documentation](https://docs.mage.ai)
 - [DBT Documentation](https://docs.getdbt.com)
+- [Azure/Azurite](https://github.com/Azure/Azurite)
 - [Streamlit Documentation](https://docs.streamlit.io)
