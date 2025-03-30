@@ -13,6 +13,7 @@ This project demonstrates an end-to-end data pipeline built using modern tools a
 - [Overview](#overview)
 - [Problem Statement](#problem-statement)
 - [Project Objectives](#project-objectives)
+- [How to Clone This Project](how-to-clone-this-project)
 - [About the Dataset](#about-the-dataset)
 - [Pipeline Architecture](#pipeline-architecture)
 - [Technologies and Tools Used](#technologies-and-tools-used)
@@ -55,6 +56,18 @@ Mental health is a critical global issue. This project utilizes a dataset that r
   - A chart illustrating the evolution of data over time or another temporal dimension.
 - **Workflow Orchestration and Automation:**  
   Organize the complete flow using modern tools, ensuring a scalable and maintainable solution.
+
+---
+
+## How to Clone This Project
+
+To get started with this project locally, follow the steps below:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/nathadriele/data-engineering-zoomcamp.git
+```
 
 ---
 
