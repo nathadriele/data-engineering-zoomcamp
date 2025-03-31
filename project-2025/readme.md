@@ -1,6 +1,6 @@
 # Data Engineering Project
 
-## Mental Health
+## 🧠 Mental Health
 
 ![image](https://github.com/user-attachments/assets/5f07e75c-6065-41dc-beb2-17236d74ed97)
 
