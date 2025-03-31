@@ -14,34 +14,33 @@ if 'test' not in globals():
 @data_loader
 def load_data_from_file(*args, **kwargs):
     """
-    Carrega dados do arquivo CSV de saúde mental.
+    Loads data from the mental health CSV file.
     """
     filepath = path.join(get_repo_path(), '..', 'data', 'mental_health_dataset.csv')
     
-    # Carregar o dataset
     df = pd.read_csv(filepath)
     
-    # Converter timestamp para datetime
+    # Convert timestamp column to datetime
     df['Timestamp'] = pd.to_datetime(df['Timestamp'])
     
-    # Preencher valores vazios
+    # Fill missing values
     df['self_employed'] = df['self_employed'].fillna('Unknown')
     
-    # Garantir que colunas de texto estejam em minúsculas para padronização
+    # Ensure text columns are lowercase for standardization
     for col in df.select_dtypes(include=['object']).columns:
         if col != 'Timestamp':
             df[col] = df[col].str.lower() if not df[col].isna().all() else df[col]
     
-    print(f"Dados carregados: {len(df)} registros")
+    print(f"Data loaded: {len(df)} records")
     return df
 
 
 @test
 def test_output(df) -> None:
     """
-    Testa se o DataFrame foi carregado corretamente
+    Tests if the DataFrame was loaded correctly.
     """
-    assert df is not None, 'O DataFrame não foi carregado'
-    assert len(df) > 0, 'O DataFrame está vazio'
-    assert 'Timestamp' in df.columns, 'Coluna Timestamp não encontrada'
-    assert 'Gender' in df.columns, 'Coluna Gender não encontrada'
+    assert df is not None, 'DataFrame was not loaded'
+    assert len(df) > 0, 'DataFrame is empty'
+    assert 'Timestamp' in df.columns, 'Timestamp column not found'
+    assert 'Gender' in df.columns, 'Gender column not found'
