@@ -164,8 +164,8 @@ mage_project/logs/
 dbt debug
 ```
 
-🤝 Contributions
+## 🤝 Contributions
 
 Contributions are welcome!
 
-📌 Project created as part of the Data Engineering Zoomcamp (2025 Edition)
+### 📌 Project created as part of the Data Engineering Zoomcamp (2025 Edition)
