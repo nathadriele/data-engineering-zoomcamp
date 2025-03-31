@@ -25,6 +25,7 @@ This project demonstrates an end-to-end data pipeline built using modern tools a
   - [3. Data Ingestion Pipeline (Mage)](#3-data-ingestion-pipeline-mage)
   - [4. Data Transformation (DBT)](#4-data-transformation-dbt)
   - [5. Interactive Dashboard (Streamlit)](#5-interactive-dashboard-streamlit)
+  - [6. Pipeline Execution Screenshots](#6-pipeline-execution-screenshots)
 - [Final Considerations](#final-considerations)
 - [References](#references)
 
@@ -381,9 +382,54 @@ streamlit run dashboard.py
 - A chart showing the distribution of categorical data (e.g., by country, gender).
 - A chart depicting the evolution of records over time or another relevant dimension.
 
+## 6. Pipeline Execution Screenshots
+
+This section presents key screenshots from the pipeline execution to illustrate the different stages and outcomes of the project.
+
+### 1. Mage Pipeline DAG Structure
+
+![Mage Pipeline Structure](./mental_health_pipeline/images/1.png)
+
+This image displays the full DAG (Directed Acyclic Graph) as designed in Mage. It includes the data loader, transformer, and two exporters (to DuckDB and Azurite), showing the modular and sequential execution of pipeline blocks.
+
+### 2. Mage Pipeline Configuration
+
+![Mage Pipeline Metadata](./mental_health_pipeline/images/2.png)
+
+This screenshot shows the Mage interface with details of the mental_health_data pipeline. It confirms that the pipeline is active and lists metadata such as type, creation date, update date, number of blocks, and trigger settings.
+
+### 3. DBT Test Results
+
+![DBT Test Output](./mental_health_pipeline/images/3.png)
+
+After running dbt test, all checks passed successfully. The validations include not_null, unique, and relationship tests across staging and mart models — ensuring data quality and consistency.
+
+### 4. DBT Run Output
+
+![DBT Run Output](./mental_health_pipeline/images/4.png)
+
+Here we see the output of dbt run, confirming the successful execution of the transformation logic for models like stg_mental_health, dim_geography, and fact_mental_health. All models were built without errors.
+
+### 5. Streamlit Dashboard Overview
+
+![Streamlit Dashboard](./mental_health_pipeline/images/5.png)
+
+This interactive dashboard, built with Streamlit and Plotly, displays key metrics and visualizations from the mental health dataset. It includes:
+
+- Total respondents
+- Treatment and stress indicators
+- Country distribution
+- Stress levels by gender
+
+The dashboard empowers users to explore trends interactively through filters and dynamic charts.
+
+---
+
 ## Final Considerations
 
 This project demonstrates a complete Data Engineering solution, covering data ingestion into a data lake, transformation in a data warehouse, and interactive visualization via a dashboard. Its modular design and use of modern tools (Terraform, Mage, DBT, and Streamlit) ensure scalability and adaptability across different environments (local or cloud). Detailed documentation and step-by-step instructions make the project reproducible and easy to maintain.
+
+---
 
 ## References
 
