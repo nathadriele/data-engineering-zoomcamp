@@ -11,16 +11,16 @@ if 'data_exporter' not in globals():
 @data_exporter
 def export_data_to_azurite(df: pd.DataFrame, **kwargs) -> None:
     """
-    Exporta os dados para o Azurite local
+    Exports data to the local Azurite instance.
     """
-    # Configurações do Azurite
+    # Azurite configuration
     connect_str = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;"
     container_name = "raw-data"
     
-    # Criar cliente de serviço Blob
+    # Create Blob service client
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
     
-    # Criar container se não existir
+    # Create container if it doesn't exist
     try:
         container_client = blob_service_client.get_container_client(container_name)
         if not container_client.exists():
@@ -28,14 +28,14 @@ def export_data_to_azurite(df: pd.DataFrame, **kwargs) -> None:
     except Exception as e:
         container_client = blob_service_client.create_container(container_name)
     
-    # Converter DataFrame para CSV
+    # Convert DataFrame to CSV
     csv_data = io.StringIO()
     df.to_csv(csv_data, index=False)
     csv_data.seek(0)
     csv_bytes = csv_data.getvalue().encode('utf-8')
     
-    # Enviar para o Azurite
+    # Upload to Azurite
     blob_client = blob_service_client.get_blob_client(container=container_name, blob="mental_health_data.csv")
     blob_client.upload_blob(csv_bytes, overwrite=True)
     
-    print(f"Dados exportados para Azurite: container={container_name}, blob=mental_health_data.csv")
+    print(f"Data exported to Azurite: container={container_name}, blob=mental_health_data.csv")
