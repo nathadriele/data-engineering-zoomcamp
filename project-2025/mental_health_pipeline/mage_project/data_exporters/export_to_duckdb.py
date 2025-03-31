@@ -10,15 +10,15 @@ if 'data_exporter' not in globals():
 @data_exporter
 def export_data_to_duckdb(df: pd.DataFrame, **kwargs) -> None:
     """
-    Exporta os dados para o DuckDB para posterior transformação com DBT
+    Exports the data to DuckDB for further transformation using DBT.
     """
-    # Caminho para o arquivo DuckDB
+    # Path to the DuckDB file
     db_path = path.join(get_repo_path(), '..', 'data', 'duckdb', 'mental_health.db')
     
-    # Conectar ao DuckDB
+    # Connect to DuckDB
     con = duckdb.connect(db_path)
     
-    # Criar tabela raw se não existir
+    # Create raw table if it doesn't exist
     con.execute("""
     CREATE TABLE IF NOT EXISTS raw_mental_health (
         Timestamp TIMESTAMP,
@@ -41,17 +41,17 @@ def export_data_to_duckdb(df: pd.DataFrame, **kwargs) -> None:
     )
     """)
     
-    # Limpar dados anteriores
+    # Clean up previous data
     con.execute("DELETE FROM raw_mental_health")
     
-    # Inserir dados
+    # Insert new data
     con.register('temp_df', df)
     con.execute("INSERT INTO raw_mental_health SELECT * FROM temp_df")
     
-    # Verificar registros
+    # Check record count
     count = con.execute("SELECT COUNT(*) FROM raw_mental_health").fetchone()[0]
     
-    # Fechar conexão
+    # Close connection
     con.close()
     
-    print(f"Dados exportados para DuckDB: {count} registros na tabela raw_mental_health")
+    print(f"Data exported to DuckDB: {count} records in table raw_mental_health")
