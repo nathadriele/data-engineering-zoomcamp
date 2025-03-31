@@ -12,7 +12,7 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
-# Configuração para ambiente local com Azurite
+# Run Azurite locally for local storage emulation
 resource "null_resource" "azurite_container" {
   provisioner "local-exec" {
     command = <<EOT
@@ -21,14 +21,14 @@ resource "null_resource" "azurite_container" {
   }
 }
 
-# Criar o diretório para DuckDB
+# Create directory for DuckDB storage
 resource "null_resource" "create_duckdb_dir" {
   provisioner "local-exec" {
     command = "mkdir -p ${path.module}/../data/duckdb"
   }
 }
 
-# Baixar os dados de exemplo
+# Download example dataset
 resource "null_resource" "download_dataset" {
   provisioner "local-exec" {
     command = <<EOT
@@ -43,7 +43,7 @@ resource "null_resource" "download_dataset" {
   }
 }
 
-# Instalar e configurar Mage
+# Install and configure Mage
 resource "null_resource" "setup_mage" {
   depends_on = [null_resource.azurite_container, null_resource.create_duckdb_dir]
   
@@ -56,7 +56,7 @@ resource "null_resource" "setup_mage" {
   }
 }
 
-# Instalar DBT para DuckDB
+# Install DBT for DuckDB
 resource "null_resource" "setup_dbt" {
   provisioner "local-exec" {
     command = <<EOT
@@ -67,7 +67,7 @@ resource "null_resource" "setup_dbt" {
   }
 }
 
-# Instalar Streamlit
+# Install Streamlit and supporting libraries
 resource "null_resource" "setup_streamlit" {
   provisioner "local-exec" {
     command = "pip install streamlit pandas matplotlib seaborn plotly"
@@ -75,5 +75,5 @@ resource "null_resource" "setup_streamlit" {
 }
 
 output "setup_complete" {
-  value = "Infraestrutura configurada com sucesso. Azurite está rodando em localhost:10000-10002, Mage está instalado, DuckDB está configurado, DBT e Streamlit instalados."
+  value = "Infrastructure successfully configured. Azurite is running on localhost:10000-10002, Mage is installed, DuckDB is configured, and DBT and Streamlit are installed."
 }
