@@ -79,11 +79,11 @@ cd data-engineering-zoomcamp/project-2025
 
 Inside the project-2025 directory, you’ll find all the components needed for the end-to-end pipeline, including:
 
-- infrastructure/ — Infrastructure as Code using Terraform and Docker.
-- data_pipeline/ — Data ingestion logic and Mage project.
-- dbt_project/ — DBT models for data transformation.
-- visualization/ — Streamlit dashboard and Plotly visualizations.
-- README.md — Documentation with setup and execution guide.
+- `infrastructure/ — Infrastructure as Code using Terraform and Docker`.
+- `data_pipeline/ — Data ingestion logic and Mage project`.
+- `dbt_project/ — DBT models for data transformation`.
+- `visualization/ — Streamlit dashboard and Plotly visualizations`.
+- `README.md — Documentation with setup and execution guide`.
 
 ---
 
@@ -146,36 +146,36 @@ The pipeline consists of five main stages:
 In this project, a suite of modern and specialized tools was integrated to build a robust end-to-end data pipeline. Each tool plays a critical role in the process of extracting, transforming, loading, and visualizing data. Below is a detailed description of each tool and its purpose within the project:
 
 ### Terraform
-   - Description: A powerful Infrastructure as Code (IaC) tool that enables the declarative creation, modification, and versioning of infrastructure.
-   - Role in the Project: Used to provision and configure the local environment, including the Azure Storage emulator (Azurite) and other infrastructure dependencies. This ensures that the environment is reproducible, scalable, and version-controlled.
+   - `Description`: A powerful Infrastructure as Code (IaC) tool that enables the declarative creation, modification, and versioning of infrastructure.
+   - `Role in the Project`: Used to provision and configure the local environment, including the Azure Storage emulator (Azurite) and other infrastructure dependencies. This ensures that the environment is reproducible, scalable, and version-controlled.
 
 ### Docker
-   - Description: A platform for developing, shipping, and running applications in isolated containers. It provides a lightweight and consistent runtime environment across systems.
-   - Role in the Project: Used to run Azurite locally in a containerized environment. This allows the simulation of Azure Blob Storage services without needing access to the cloud, enabling consistent and reproducible development and testing.
+   - `Description`: A platform for developing, shipping, and running applications in isolated containers. It provides a lightweight and consistent runtime environment across systems.
+   - `Role in the Project`: Used to run Azurite locally in a containerized environment. This allows the simulation of Azure Blob Storage services without needing access to the cloud, enabling consistent and reproducible development and testing.
 
 ### Mage
-   - Description: A modern platform for designing and orchestrating data pipelines, making it easier to construct and execute data ingestion flows.
-   - Role in the Project: Manages the data ingestion pipeline by extracting data from the source dataset and uploading it to the data lake (Azurite). It ensures smooth and automated data flow from extraction to storage.
+   - `Description`: A modern platform for designing and orchestrating data pipelines, making it easier to construct and execute data ingestion flows.
+   - `Role in the Project`: Manages the data ingestion pipeline by extracting data from the source dataset and uploading it to the data lake (Azurite). It ensures smooth and automated data flow from extraction to storage.
 
 ### Azurite
-   - Description: A local emulator for Azure Storage that simulates the behavior of Azure’s storage services without requiring a cloud environment.
-   - Role in the Project: Serves as the local data lake where raw data is initially stored after ingestion. This setup allows for testing and development in a cost-effective and controlled environment.
+   - `Description`: A local emulator for Azure Storage that simulates the behavior of Azure’s storage services without requiring a cloud environment.
+   - `Role in the Project`: Serves as the local data lake where raw data is initially stored after ingestion. This setup allows for testing and development in a cost-effective and controlled environment.
 
 ### DuckDB
-   - Description: A high-performance, columnar-oriented relational database optimized for analytical queries. It is designed for efficient local data processing and analysis.
-   - Role in the Project: Acts as the data warehouse by storing and enabling efficient querying of the ingested data from Azurite. This facilitates further transformation and analysis steps.
+   - `Description`: A high-performance, columnar-oriented relational database optimized for analytical queries. It is designed for efficient local data processing and analysis.
+   - `Role in the Project`: Acts as the data warehouse by storing and enabling efficient querying of the ingested data from Azurite. This facilitates further transformation and analysis steps.
 
 ### DBT (Data Build Tool)
-   - Description: A transformation tool that enables data modeling, testing, and documentation using SQL. It enforces best practices in data transformation and quality assurance.
-   - Role in the Project: Responsible for transforming and modeling the data stored in DuckDB. DBT applies rigorous testing and validation, ensuring that the data is clean and ready for analysis before it is visualized.
+   - `Description`: A transformation tool that enables data modeling, testing, and documentation using SQL. It enforces best practices in data transformation and quality assurance.
+   - `Role in the Project`: Responsible for transforming and modeling the data stored in DuckDB. DBT applies rigorous testing and validation, ensuring that the data is clean and ready for analysis before it is visualized.
 
 ### Streamlit
-   - Description: An open-source Python framework that simplifies the creation of interactive web applications, particularly dashboards and data visualizations.
-   - Role in the Project: Used to build an interactive dashboard that dynamically displays insights from the mental health data. Streamlit offers a user-friendly interface for exploring and interacting with the visualized data.
+   - `Description`: An open-source Python framework that simplifies the creation of interactive web applications, particularly dashboards and data visualizations.
+   - `Role in the Project`: Used to build an interactive dashboard that dynamically displays insights from the mental health data. Streamlit offers a user-friendly interface for exploring and interacting with the visualized data.
 
 ### Plotly
-   - Description: A versatile data visualization library in Python that provides interactive, high-quality charts and graphs.
-   - Role in the Project: Integrated with Streamlit to generate dynamic and interactive visualizations. Plotly enhances the dashboard by enabling detailed exploration of data trends and distributions.
+   - `Description`: A versatile data visualization library in Python that provides interactive, high-quality charts and graphs.
+   - `Role in the Project`: Integrated with Streamlit to generate dynamic and interactive visualizations. Plotly enhances the dashboard by enabling detailed exploration of data trends and distributions.
 
 ---
 
