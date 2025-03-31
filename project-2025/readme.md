@@ -197,59 +197,74 @@ In this project, a suite of modern and specialized tools was integrated to build
 ```powershell
 mental_health_project/
 │
-├── infrastructure/
-│   ├── main.tf
-│   ├── variables.tf
-│   ├── outputs.tf
-│   ├── azurite_setup.ps1
-│   └── azurite-data/
-│
-├── data_pipeline/
-│   ├── mental-health-project/
-│   │   ├── ingestion_pipeline.py
-│   │   ├── io_config.yaml
-│   │   └── blocks/
-│   ├── scripts/
-│   │   ├── ingest_data.py
-│   │   └── load_to_warehouse.py
-│   └── mental_health.duckdb
+├── data/
+│   ├── duckdb/
+│   │   ├── logs/                     # DuckDB logs (debug, query logs, etc.)
+│   │   └── mental_health.db          # Local DuckDB database file
+│   ├── mental_health_dataset.csv     # Original mental health dataset
+│   └── ...                           # Other data sources, if any
 │
 ├── dbt_project/
-│   └── mental_health_transform/
-│       ├── models/
-│       │   ├── staging/
-│       │   │   └── stg_mental_health.sql
-│       │   ├── marts/
-│       │   │   └── mental_health_clean.sql
-│       │   └── schema.yml
-│       ├── snapshots/
-│       ├── seeds/
-│       ├── dbt_project.yml
-│       └── profiles.yml
+│   ├── dbt_packages/                 # Installed DBT packages
+│   ├── logs/                         # DBT execution logs
+│   ├── models/
+│   │   ├── marts/
+│   │   │   ├── dim_geography.sql     # Example: Geography dimension table
+│   │   │   ├── fact_mental_health.sql# Example: Mental health fact table
+│   │   │   └── schema.yml            # Model definitions and tests for marts
+│   │   └── staging/
+│   │       └── stg_mental_health.sql # Staging model for raw mental health data
+│   ├── target/                       # Compiled artifacts and DBT run results
+│   │   └── ...                       
+│   ├── dbt_project.yml               # Main DBT project configuration file
+│   └── profiles.yml                  # Connection configuration (e.g., DuckDB)
 │
-├── visualization/
-│   ├── dashboard.py
-│   ├── charts/
-│   │   ├── distribution_plot.py
-│   │   └── temporal_plot.py
-│   ├── pages/
-│   │   └── about.py
-│   └── utils/
-│       └── data_loader.py
+├── images/                           # Illustrative images and project screenshots
+│   ├── 1.png
+│   ├── 2.png
+│   ├── 3.png
+│   ├── 4.png
+│   └── 5.png
 │
-├── tests/
-│   ├── test_ingestion.py
-│   ├── test_transformation.sql
-│   └── test_visualization.py
+├── mage_project/
+│   ├── data_exporters/               # Scripts to export data (e.g., to DuckDB)
+│   │   ├── export_to_duckdb.py
+│   │   └── load_mental_health_data.py
+│   ├── data_loaders/                 # Additional ingestion scripts
+│   │   └── ...                       
+│   ├── dbt/                         # Optional DBT configuration for Mage integration
+│   │   └── profiles.yml              
+│   ├── extensions/                   # Custom extensions for Mage
+│   │   └── ...                       
+│   ├── interactions/                # Mage hooks and interactions
+│   │   └── ...                       
+│   ├── pipelines/                   # Pipeline definitions and configurations
+│   │   ├── mental_health_data/       # Pipeline specific for mental health data
+│   │   └── mental_health_pipeline.py # Main pipeline script (Mage)
+│   ├── scratchpads/                  # Experimental or temporary scripts
+│   │   └── ...                       
+│   ├── transformers/                # Scripts to transform data
+│   │   ├── fill_in_missing_values.py
+│   │   └── mental_health_transformer.py
+│   └── utils/                       # Utility functions and shared modules
+│       └── __init__.py
 │
-├── notebooks/
-│   └── exploratory_analysis.ipynb
+├── streamlit/
+│   ├── app.py                        # Main Streamlit dashboard application
+│   └── ...                           # Additional modules, pages, or configs
 │
-├── requirements.txt
-├── pyproject.toml
-├── Makefile
-├── run_project.ps1
-└── README.md
+├── terraform/
+│   ├── main.tf                       # Main Terraform configuration file
+│   ├── variables.tf                  # Variable definitions for infrastructure
+│   ├── outputs.tf                    # Terraform outputs
+│   └── azurite_setup.ps1             # Script to start Azurite via Docker
+│
+├── readme.md                         # Project documentation
+├── requirements.txt                  # Python dependencies list
+├── pyproject.toml                    # Project configuration (if applicable)
+├── Makefile                          # Automation script (build, test, etc.)
+├── run_project.ps1                   # Script to run the complete project
+└── ...
 ```
 
 ---
