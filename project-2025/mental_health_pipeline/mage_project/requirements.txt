@@ -1,0 +1,22 @@
+# requirements.txt
+
+# Core libraries
+pandas==1.5.3
+pyarrow==11.0.0
+
+# Data Ingestion and Orchestration
+mage-ai==0.8.59
+
+# Database and Data Warehouse
+duckdb==0.7.1
+
+# Data Transformation
+dbt-core==1.4.6
+dbt-duckdb==1.4.2
+
+# Visualization
+streamlit==1.18.1
+plotly==5.11.0
+
+# Azure Storage (for Azurite / Azure blob interactions)
+azure-storage-blob==12.14.1
