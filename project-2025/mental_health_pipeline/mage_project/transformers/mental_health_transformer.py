@@ -13,61 +13,59 @@ if 'test' not in globals():
 @transformer
 def transform(data, *args, **kwargs):
     """
-    Transforma e limpa os dados para análise.
+    Transforms and cleans the data for analysis.
     
     Args:
-        data: O DataFrame com os dados brutos carregados anteriormente.
+        data: The DataFrame with raw data loaded previously.
         
     Returns:
-        DataFrame: O DataFrame transformado.
+        DataFrame: The transformed DataFrame.
     """
-    print(f"Transformando dados com {len(data)} registros")
+    print(f"Transforming data with {len(data)} records")
     
-    # Criar uma cópia para trabalhar
     df = data.copy()
     
-    # 1. Padronização de valores
-    # Converter para capitalizar Country e Gender
+    # Standardize values
     df['Country'] = df['Country'].str.title()
     df['Gender'] = df['Gender'].str.title()
     
-    # 2. Criar indicador binário para tratamento de saúde mental
+    # Create binary indicator for mental health treatment
     df['has_treatment'] = df['treatment'].apply(lambda x: 1 if x == 'Yes' else 0)
     
-    # 3. Criar indicador binário para histórico familiar
+    # Create binary indicator for family history
     df['has_family_history'] = df['family_history'].apply(lambda x: 1 if x == 'Yes' else 0)
     
-    # 4. Extrair número aproximado de dias em casa (média de cada faixa)
+    # Approximate number of days indoors (mean value per range)
     def extract_days(days_range):
         if pd.isna(days_range) or days_range == '':
             return None
         elif days_range == '1-14 days':
-            return 7  # média da faixa 1-14
+            return 7
         elif days_range == '15-30 days':
-            return 22  # média da faixa 15-30
+            return 22
         elif days_range == '31-60 days':
-            return 45  # média da faixa 31-60
+            return 45
         elif days_range == '60+ days':
-            return 75  # valor estimado para 60+
+            return 75
         else:
             return None
     
     df['days_indoors_numeric'] = df['Days_Indoors'].apply(extract_days)
     
-    # 5. Criar índice de estresse baseado em várias colunas
+    # Create a stress index based on several columns
     df['stress_index'] = (
-        (df['Growing_Stress'] == 'Yes').astype(int) * 3 +  # Peso 3 para estresse crescente
-        (df['Changes_Habits'] == 'Yes').astype(int) * 2 +  # Peso 2 para mudanças de hábitos
-        (df['Mood_Swings'] == 'High').astype(int) * 3 +    # Peso 3 para oscilações de humor altas
-        (df['Mood_Swings'] == 'Medium').astype(int) * 2 +  # Peso 2 para oscilações médias
-        (df['Coping_Struggles'] == 'Yes').astype(int) * 2  # Peso 2 para dificuldades de enfrentamento
+        (df['Growing_Stress'] == 'Yes').astype(int) * 3 +
+        (df['Changes_Habits'] == 'Yes').astype(int) * 2 +
+        (df['Mood_Swings'] == 'High').astype(int) * 3 +
+        (df['Mood_Swings'] == 'Medium').astype(int) * 2 +
+        (df['Coping_Struggles'] == 'Yes').astype(int) * 2
     )
     
-    # 6. Agrupar ocupações similares
+    # Group similar occupations
     def standardize_occupation(occupation):
         if pd.isna(occupation) or occupation == '':
             return 'Unknown'
-            
+        
         occupation = occupation.lower()
         
         if 'software' in occupation or 'developer' in occupation or 'programmer' in occupation or 'engineer' in occupation:
@@ -85,14 +83,14 @@ def transform(data, *args, **kwargs):
     
     df['occupation_group'] = df['Occupation'].apply(standardize_occupation)
     
-    # 7. Criar flag para casos que precisam de atenção imediata
+    # Flag cases that need immediate attention
     df['needs_attention'] = (
-        (df['stress_index'] >= 6) &  # Índice de estresse alto
-        (df['Social_Weakness'] == 'Yes') &  # Sinais de fraqueza social
-        (df['Work_Interest'] == 'No')  # Perda de interesse no trabalho
+        (df['stress_index'] >= 6) &
+        (df['Social_Weakness'] == 'Yes') &
+        (df['Work_Interest'] == 'No')
     ).astype(int)
     
-    print(f"Transformação concluída, resultando em {len(df)} registros")
+    print(f"Transformation completed with {len(df)} records")
     
     return df
 
@@ -100,11 +98,11 @@ def transform(data, *args, **kwargs):
 @test
 def test_output(output, *args) -> None:
     """
-    Testa se a transformação foi aplicada corretamente.
+    Tests if the transformation was applied correctly.
     """
-    assert output is not None, 'A saída é nula'
-    assert isinstance(output, DataFrame), 'A saída não é um DataFrame'
-    assert 'has_treatment' in output.columns, 'A coluna has_treatment está ausente'
-    assert 'stress_index' in output.columns, 'A coluna stress_index está ausente'
-    assert 'occupation_group' in output.columns, 'A coluna occupation_group está ausente'
-    print('Testes de transformação concluídos com sucesso!')
+    assert output is not None, 'Output is null'
+    assert isinstance(output, DataFrame), 'Output is not a DataFrame'
+    assert 'has_treatment' in output.columns, 'Column has_treatment is missing'
+    assert 'stress_index' in output.columns, 'Column stress_index is missing'
+    assert 'occupation_group' in output.columns, 'Column occupation_group is missing'
+    print('Transformation tests passed successfully!')
