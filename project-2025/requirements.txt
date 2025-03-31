@@ -1,0 +1,10 @@
+mage-ai
+azure-storage-blob
+duckdb
+dbt-core
+dbt-duckdb
+streamlit
+pandas
+plotly
+matplotlib
+seaborn
