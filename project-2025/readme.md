@@ -1,6 +1,6 @@
 # Data Engineering Project
 
-## 🧠 Mental Health
+## 🧠📊 Mental Health
 
 ![image](https://github.com/user-attachments/assets/5f07e75c-6065-41dc-beb2-17236d74ed97)
 
@@ -26,6 +26,7 @@ This project demonstrates an end-to-end data pipeline built using modern tools a
   - [4. Data Transformation (DBT)](#4-data-transformation-dbt)
   - [5. Interactive Dashboard (Streamlit)](#5-interactive-dashboard-streamlit)
   - [6. Pipeline Execution Screenshots](#6-pipeline-execution-screenshots)
+- [Conclusion](#conclusion)
 - [Final Considerations](#final-considerations)
 - [References](#references)
 
@@ -121,6 +122,8 @@ The dataset used in this project is obtained from [Kaggle](https://www.kaggle.co
 
 ## Pipeline Architecture
 
+![image](https://github.com/user-attachments/assets/38f00bce-4887-4988-8b3a-adbd7b464243)
+
 The pipeline consists of five main stages:
 
 1. **Infrastructure:**  
@@ -180,16 +183,18 @@ In this project, a suite of modern and specialized tools was integrated to build
 
 ---
 
-## Languages Used
+## 💻 Languages Used
 
-| Language       | Purpose                                                                                     |
-|----------------|---------------------------------------------------------------------------------------------|
-| **Python**     | Development of data ingestion pipelines (Mage), helper scripts, and interactive dashboards using Streamlit and Plotly. |
-| **SQL**        | Data transformation and modeling using DBT and analytical queries in DuckDB.               |
-| **HCL**        | Infrastructure provisioning using Terraform (Infrastructure as Code).                      |
-| **YAML**       | Configuration files for Mage pipelines, DBT models, and environment settings.              |
-| **PowerShell** | Automation scripts for Windows environment setup and running local services like Azurite.  |
-| **Markdown**   | Project documentation, including this README and additional reference files.               |
+![image](https://github.com/user-attachments/assets/1ab057a0-2fcd-49a0-9831-7c5a0ba76ba4)
+
+| Language       | Purpose                                                                                              |
+|----------------|------------------------------------------------------------------------------------------------------|
+| **Python**     | Used for building data ingestion pipelines (with Mage), helper scripts, and interactive dashboards using Streamlit and Plotly. |
+| **SQL**        | Employed in data transformation and modeling within DBT, as well as analytical queries in DuckDB.     |
+| **HCL**        | Utilized for defining infrastructure as code with Terraform, enabling automated and reproducible setups. |
+| **YAML**       | Handles configuration of Mage pipelines, DBT models, and environment parameters.                     |
+| **PowerShell** | Powers local automation tasks, including service orchestration and Azurite setup on Windows.         |
+| **Markdown**   | Documents the project structure, setup instructions, and technical references in the README and other files. |
 
 ---
 
@@ -221,11 +226,11 @@ mental_health_project/
 │   └── profiles.yml                  # Connection configuration (e.g., DuckDB)
 │
 ├── images/                           # Illustrative images and project screenshots
-│   ├── 1.png
-│   ├── 2.png
-│   ├── 3.png
-│   ├── 4.png
-│   └── 5.png
+│   ├── Mage Pipeline Structure.png
+│   ├── Mage Pipeline Metadata.png
+│   ├── DBT Test Output.png
+│   ├── DBT Run Output.png
+│   └── Streamlit Dashboard.png
 │
 ├── mage_project/
 │   ├── data_exporters/               # Scripts to export data (e.g., to DuckDB)
@@ -274,34 +279,76 @@ mental_health_project/
 
 ### 1. Environment Setup
 
-**Prerequisites:**
-- Windows 10/11
-- Python 3.8+
-- Docker Desktop (to run Azurite)
-- Azure account (optional for cloud environments)
+Prerequisites (All Platforms):
+   - Python 3.8 or higher
+   - Docker (for running Azurite locally)
+   - Git
+   - Azure account (optional, only for cloud deployments)
 
-**Tool Installation:**
+### 🪟 Windows (10/11)
 
-Use the script below to install Chocolatey and the required tools:
+#### Use PowerShell to install the necessary tools:
 
 ```powershell
-# setup_environment.ps1
-
-# Install Chocolatey (if not already installed)
+# Install Chocolatey (if not installed)
 Set-ExecutionPolicy Bypass -Scope Process -Force; `
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
 iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-# Install required tools
+# Install dependencies
 choco install -y python terraform docker-desktop git
 
-# Create and activate Python virtual environment0
+# Create and activate virtual environment
 python -m venv .venv
 .\.venv\Scripts\activate
 
 # Install Python packages
-pip install mage-ai duckdb dbt-core streamlit pandas pyarrow azure-storage-blob plotly
+pip install -r requirements.txt
 ```
+
+### 🍏 macOS (Intel or Apple Silicon)
+
+#### Use Homebrew to install dependencies:
+
+```powershell
+# Install Homebrew (if not installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install required tools
+brew install python terraform git
+brew install --cask docker
+
+# Start Docker manually from Applications (first-time only)
+
+# Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install Python packages
+pip install -r requirements.txt
+```
+
+### 🐧 Linux (Ubuntu/Debian-based)
+
+```powershell
+# Update and install dependencies
+sudo apt update
+sudo apt install -y python3 python3-venv python3-pip docker.io terraform git
+
+# Enable Docker (may require reboot or permission adjustments)
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+
+# Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install Python packages
+pip install -r requirements.txt
+```
+
+Tip: On Linux/macOS, you may need to run source ~/.bashrc or restart your terminal session to apply Docker permissions.
 
 ### 2. Infrastructure Provisioning (Terraform) 
 
@@ -363,7 +410,7 @@ dbt run
 dbt test
 ```
 
-## 5. Interactive Dashboard (Streamlit)
+### 5. Interactive Dashboard (Streamlit) 
 
 #### 1. Navigate to the visualization folder:
 
@@ -382,35 +429,35 @@ streamlit run dashboard.py
 - A chart showing the distribution of categorical data (e.g., by country, gender).
 - A chart depicting the evolution of records over time or another relevant dimension.
 
-## 6. Pipeline Execution Screenshots
+## 6. Pipeline Execution Screenshots 
 
 This section presents key screenshots from the pipeline execution to illustrate the different stages and outcomes of the project.
 
-### 1. Mage Pipeline DAG Structure
+### 1. Mage Pipeline DAG Structure 
 
 ![Mage Pipeline Structure](./mental_health_pipeline/images/1.png)
 
 This image displays the full DAG (Directed Acyclic Graph) as designed in Mage. It includes the data loader, transformer, and two exporters (to DuckDB and Azurite), showing the modular and sequential execution of pipeline blocks.
 
-### 2. Mage Pipeline Configuration
+### 2. Mage Pipeline Configuration 
 
 ![Mage Pipeline Metadata](./mental_health_pipeline/images/2.png)
 
 This screenshot shows the Mage interface with details of the mental_health_data pipeline. It confirms that the pipeline is active and lists metadata such as type, creation date, update date, number of blocks, and trigger settings.
 
-### 3. DBT Test Results
+### 3. DBT Test Results 
 
 ![DBT Test Output](./mental_health_pipeline/images/3.png)
 
 After running dbt test, all checks passed successfully. The validations include not_null, unique, and relationship tests across staging and mart models — ensuring data quality and consistency.
 
-### 4. DBT Run Output
+### 4. DBT Run Output 
 
 ![DBT Run Output](./mental_health_pipeline/images/4.png)
 
 Here we see the output of dbt run, confirming the successful execution of the transformation logic for models like stg_mental_health, dim_geography, and fact_mental_health. All models were built without errors.
 
-### 5. Streamlit Dashboard Overview
+### 5. Streamlit Dashboard Overview 
 
 ![Streamlit Dashboard](./mental_health_pipeline/images/5.png)
 
@@ -425,9 +472,17 @@ The dashboard empowers users to explore trends interactively through filters and
 
 ---
 
-## Final Considerations
+## Final Considerations 
 
 This project demonstrates a complete Data Engineering solution, covering data ingestion into a data lake, transformation in a data warehouse, and interactive visualization via a dashboard. Its modular design and use of modern tools (Terraform, Mage, DBT, and Streamlit) ensure scalability and adaptability across different environments (local or cloud). Detailed documentation and step-by-step instructions make the project reproducible and easy to maintain.
+
+---
+
+## Conclusion 
+
+This project presents a complete, modular, and reproducible end-to-end data engineering pipeline applied to a global mental health dataset. By leveraging modern tools such as Mage, Terraform, DuckDB, DBT, and Streamlit, the pipeline ensures effective data ingestion, transformation, and interactive visualization — all orchestrated in a local and fully automated environment.
+
+The approach enables scalable and maintainable workflows that can be adapted to real-world data engineering challenges. From data loading to analytical dashboards, each step reflects industry best practices and reinforces the importance of integrating infrastructure, pipelines, and user-friendly visual insights into a unified solution.
 
 ---
 
