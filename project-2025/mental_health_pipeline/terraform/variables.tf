@@ -1,14 +1,14 @@
 variable "project_name" {
-  description = "Nome do projeto"
+  description = "Project name"
   default     = "mental-health-de-zoomcamp"
 }
 
 variable "azurite_container_name" {
-  description = "Nome do container para o Azurite"
+  description = "Name of the Azurite container"
   default     = "raw-data"
 }
 
 variable "duckdb_path" {
-  description = "Caminho para o arquivo DuckDB"
+  description = "Path to the DuckDB file"
   default     = "../data/duckdb/mental_health.db"
 }
