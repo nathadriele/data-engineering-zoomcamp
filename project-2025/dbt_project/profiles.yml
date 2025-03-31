@@ -1,0 +1,8 @@
+mental_health_duckdb:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../data/duckdb/mental_health.db
+      schemas:
+        - main

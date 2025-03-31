@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dim_geography
+    description: "Dimensão geográfica para análise de saúde mental"
+    columns:
+      - name: geography_id
+        description: "Chave primária para dimensão geográfica"
+        tests:
+          - unique
+          - not_null
+      
+      - name: Country
+        description: "Nome do país"
+        tests:
+          - not_null
+
+  - name: fact_mental_health
+    description: "Tabela de fatos para análise de saúde mental"
+    columns:
+      - name: Timestamp
+        description: "Data e hora de registro"
+        tests:
+          - not_null
+      
+      - name: geography_id
+        description: "Referência para a dimensão geográfica"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_geography')
+              field: geography_id
