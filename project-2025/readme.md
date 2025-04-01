@@ -2,7 +2,7 @@
 
 ## 🧠📊 Mental Health
 
-![image](https://github.com/user-attachments/assets/5f07e75c-6065-41dc-beb2-17236d74ed97)
+![img](https://github.com/user-attachments/assets/b1ae193e-ac49-47b0-822f-658d6e25ea72)
 
 This project demonstrates an end-to-end data pipeline built using modern tools and best practices in data engineering. The pipeline extracts, transforms, loads, and visualizes data from a global mental health survey, applying concepts learned in the Data Engineering Zoomcamp.
  
